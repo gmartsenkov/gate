@@ -15,6 +15,7 @@ defmodule ParamValidator.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: { ParamValidator.Application, [] },
       extra_applications: [:logger]
     ]
   end
@@ -22,6 +23,7 @@ defmodule ParamValidator.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:poison, "~> 3.1"},
       {:espec, "~> 1.7.0", only: :test},
     ]
   end

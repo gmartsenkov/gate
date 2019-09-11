@@ -1,0 +1,14 @@
+{
+  "int": "Value is not an integer",
+  "str": "Value is not a string",
+  "float": "Value is not a float",
+  "list": "Value is not an array",
+  "atom": "Value is not an atom",
+  "bool": "Value is not a boolean",
+  "map": "Value is not a hash",
+  "tuple": "Value is not a tupple",
+  "equal": "{} is not equal to {}",
+  "not_equal": "{} is equal to {}",
+  "include": "{} is not part of {}",
+  "regex": "{} does not match the regural expression"
+}
