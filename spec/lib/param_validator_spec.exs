@@ -6,7 +6,7 @@ defmodule ParamValidatorSpec do
 
     let :schema do
       %{
-	"int" => :int,
+	"int" => [:int, {:equal, 1}],
 	"string" => :str,
 	"nested" => %{
 	  "float" => :float,
@@ -75,7 +75,7 @@ defmodule ParamValidatorSpec do
 
       let :expected do
 	%{
-	  "int" => "Value is not an integer",
+	  "int" => ["Value is not an integer", "fail is not equal to 1"],
 	  "string" => "Value is not a string",
 	  "nested" => %{
 	    "float" => "Value is not a float",
