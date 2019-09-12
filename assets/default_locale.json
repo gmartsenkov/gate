@@ -10,5 +10,6 @@
   "equal": "{} is not equal to {}",
   "not_equal": "{} is equal to {}",
   "include": "{} is not part of {}",
-  "regex": "{} does not match the regural expression"
+  "regex": "{} does not match the regural expression",
+  "missing": "Is missing"
 }

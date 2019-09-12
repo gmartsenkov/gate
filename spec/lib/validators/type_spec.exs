@@ -1,5 +1,6 @@
 defmodule ParamValidator.Validators.TypeSpec do
   use ESpec
+  use ParamValidator.Validators.Type
 
   @type_tests [
     %{ type: :int, valid_value: 1, wrong_value: "string", error: "Value is not an integer" },
@@ -14,14 +15,14 @@ defmodule ParamValidator.Validators.TypeSpec do
   Enum.map(@type_tests, fn(data) ->
     context "when value is an #{data.type}" do
       it "returns true" do
-	expect(described_module().validate(unquote(Macro.escape(data.valid_value)), unquote(data.type)))
+	expect(validate(unquote(Macro.escape(data.valid_value)), unquote(data.type)))
 	|> to(eq true)
       end
     end
 
     context "when value is not an #{data.type}" do
       it "returns the error" do
-	expect(described_module().validate(unquote(data.wrong_value), unquote(data.type)))
+	expect(validate(unquote(data.wrong_value), unquote(data.type)))
 	|> to(eq unquote(data.error))
       end
     end
