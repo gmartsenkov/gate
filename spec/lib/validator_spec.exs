@@ -1,4 +1,4 @@
-defmodule ParamValidator.ValidatorSpec do
+defmodule Gate.ValidatorSpec do
   use ESpec
 
   describe "validate with a list" do

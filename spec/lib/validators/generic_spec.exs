@@ -1,6 +1,6 @@
-defmodule ParamValidator.Validators.GenericSpec do
+defmodule Gate.Validators.GenericSpec do
   use ESpec
-  use ParamValidator.Validators.Generic
+  use Gate.Validators.Generic
 
   describe "equal" do
     context "when values match" do

@@ -1,4 +1,4 @@
-defmodule ParamValidator.Errors.FormatSpec do
+defmodule Gate.Errors.FormatSpec do
   use ESpec
 
   subject do: described_module().call(params())

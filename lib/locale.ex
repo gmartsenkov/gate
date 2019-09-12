@@ -1,5 +1,5 @@
-defmodule ParamValidator.Locale do
-  alias ParamValidator.Errors.Substitution
+defmodule Gate.Locale do
+  alias Gate.Errors.Substitution
 
   @self __MODULE__
 

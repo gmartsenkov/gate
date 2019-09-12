@@ -1,6 +1,6 @@
-defmodule ParamValidator.Validator do
-  use ParamValidator.Validators.Type
-  use ParamValidator.Validators.Generic
+defmodule Gate.Validator do
+  use Gate.Validators.Type
+  use Gate.Validators.Generic
 
   def validate(value, validations, result \\ [])
 

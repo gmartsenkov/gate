@@ -1,5 +1,5 @@
-defmodule ParamValidator.Validators.Type do
-  alias ParamValidator.Locale
+defmodule Gate.Validators.Type do
+  alias Gate.Locale
 
   defmacro __using__(opts) do
     quote do

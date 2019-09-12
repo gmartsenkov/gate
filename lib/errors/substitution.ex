@@ -1,5 +1,5 @@
-defmodule ParamValidator.Errors.Substitution do
-  alias ParamValidator.Errors.Format
+defmodule Gate.Errors.Substitution do
+  alias Gate.Errors.Format
 
   def substitute(text, [value|tail]) do
     String.replace(text, "{}", "#{Format.call(value)}", global: false)

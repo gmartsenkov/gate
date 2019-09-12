@@ -1,4 +1,4 @@
-defmodule ParamValidator.Validators.StringSpec do
+defmodule Gate.Validators.StringSpec do
   use ESpec
 
   subject do: described_module()

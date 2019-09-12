@@ -1,4 +1,4 @@
-defmodule ParamValidatorSpec do
+defmodule GateSpec do
   use ESpec
 
   describe "valid?" do

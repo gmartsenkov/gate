@@ -1,4 +1,4 @@
-defmodule ParamValidator.MixProject do
+defmodule Gate.MixProject do
   use Mix.Project
 
   def project do
@@ -15,7 +15,7 @@ defmodule ParamValidator.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      mod: { ParamValidator.Application, [] },
+      mod: { Gate.Application, [] },
       extra_applications: [:logger]
     ]
   end

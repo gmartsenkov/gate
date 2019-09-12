@@ -1,6 +1,6 @@
-defmodule ParamValidator.Validators.TypeSpec do
+defmodule Gate.Validators.TypeSpec do
   use ESpec
-  use ParamValidator.Validators.Type
+  use Gate.Validators.Type
 
   @type_tests [
     %{ type: :int, valid_value: 1, wrong_value: "string", error: "Value is not an integer" },

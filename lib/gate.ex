@@ -1,6 +1,6 @@
-defmodule ParamValidator do
-  alias ParamValidator.Validator
-  alias ParamValidator.Locale
+defmodule Gate do
+  alias Gate.Validator
+  alias Gate.Locale
 
   def valid?(schema, params) do
     validate(schema, params, %{}, %{})

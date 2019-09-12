@@ -1,4 +1,4 @@
-defmodule ParamValidator.Errors.SubstitutionSpec do
+defmodule Gate.Errors.SubstitutionSpec do
   use ESpec
 
   describe "substitute" do
