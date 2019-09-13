@@ -20,5 +20,7 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-param_validator-*.tar
+gate-*.tar
+
+.DS_Store
 

@@ -10,7 +10,8 @@ defmodule Gate.MixProject do
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      preferred_cli_env: [espec: :test]
+      preferred_cli_env: [espec: :test],
+      docs: docs()
     ]
   end
 
@@ -36,6 +37,12 @@ defmodule Gate.MixProject do
       {:espec, "~> 1.7.0", only: :test},
       {:benchee, "~> 1.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev}
+    ]
+  end
+
+  defp docs do
+    [
+      logo: "assets/images/docs_logo.png"
     ]
   end
 end
