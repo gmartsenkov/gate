@@ -7,4 +7,8 @@ defmodule Gate.Errors.Substitution do
   end
 
   def substitute(text, []), do: text
+
+  def substitute(text, value) do
+    String.replace(text, "{}", "#{Format.call(value)}", global: false)
+  end
 end

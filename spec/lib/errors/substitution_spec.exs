@@ -8,5 +8,10 @@ defmodule Gate.Errors.SubstitutionSpec do
     let :args, do: ["test", "work"]
 
     it do: is_expected() |> to(eq "this test proves that substitutions work")
+
+    context "when args is a single value" do
+      let :args, do: "test"
+      it do: is_expected() |> to(eq "this test proves that substitutions {}")
+    end
   end
 end
