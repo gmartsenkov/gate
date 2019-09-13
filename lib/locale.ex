@@ -22,7 +22,7 @@ defmodule Gate.Locale do
   end
 
   defp custom_locale_file do
-    case Application.fetch_env(:param_validator, :locale_file) do
+    case Application.fetch_env(:gate, :locale_file) do
       :error -> %{}
       {:ok, file_path} -> file_path |> Path.expand(__DIR__) |> read_locale_file
     end
