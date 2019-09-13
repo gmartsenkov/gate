@@ -25,6 +25,7 @@ defmodule Gate.MixProject do
     [
       {:poison, "~> 3.1"},
       {:espec, "~> 1.7.0", only: :test},
+      {:benchee, "~> 1.0", only: :dev},
     ]
   end
 end
