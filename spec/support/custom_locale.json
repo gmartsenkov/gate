@@ -1,3 +1,4 @@
 {
-  "insecure_password": "Password needs to be at least 8 characters"
+  "insecure_password": "Password needs to be at least 8 characters",
+  "custom_func": "{} does not match 1"
 }

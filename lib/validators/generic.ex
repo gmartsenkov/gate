@@ -18,6 +18,13 @@ defmodule Gate.Validators.Generic do
           do: true,
           else: Locale.get("include", [value, list])
       end
+
+      def validate(value, {:custom, function }) when is_function(function) do
+	case function.(value) do
+	  {:locale, name, args} -> Locale.get(name, args)
+	  value -> value
+	end
+      end
     end
   end
 end

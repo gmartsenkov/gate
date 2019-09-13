@@ -49,4 +49,48 @@ defmodule Gate.Validators.GenericSpec do
       end
     end
   end
+
+  describe "custom" do
+    let :custom_func do
+      fn(val) ->
+	if val == 1, do: true, else: "Custom error"
+      end
+    end
+
+    context "when value matches" do
+      it "returns true" do
+	expect(validate(1, {:custom, custom_func()}))
+	|> to(eq true)
+      end
+    end
+
+    context "when value does not match" do
+      it "returns the error" do
+	expect(validate(2, {:custom, custom_func()}))
+	|> to(eq "Custom error")
+      end
+    end
+
+    context "when func returns a locale on missmatch" do
+      let :custom_func do
+	fn(val) ->
+	  if val == 1, do: true, else: {:locale, "custom_func", val}
+	end
+      end
+
+      context "when value matches" do
+	it "returns true" do
+	  expect(validate(1, {:custom, custom_func()}))
+	  |> to(eq true)
+	end
+      end
+
+      context "when value does not match" do
+	it "returns the error" do
+	  expect(validate(2, {:custom, custom_func()}))
+	  |> to(eq "2 does not match 1")
+	end
+      end
+    end
+  end
 end
