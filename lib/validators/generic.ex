@@ -1,7 +1,7 @@
 defmodule Gate.Validators.Generic do
   alias Gate.Locale
 
-  defmacro __using__(opts) do
+  defmacro __using__(_opts) do
     quote do
       def validate(value, {:equal, expected}) do
 	if value == expected, do: true, else: Locale.get_and_replace("equal", [value, expected])

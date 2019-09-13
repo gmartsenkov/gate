@@ -1,7 +1,7 @@
 defmodule Gate.Validators.Type do
   alias Gate.Locale
 
-  defmacro __using__(opts) do
+  defmacro __using__(_opts) do
     quote do
       def validate(value, :int), do: if is_integer(value), do: true, else: Locale.get("int")
       def validate(value, :str), do: if is_binary(value), do: true, else: Locale.get("str")
