@@ -4,7 +4,7 @@ defmodule Gate.MixProject do
   def project do
     [
       app: :gate,
-      description: "Validate paramteres against a schema",
+      description: "Validate parameters against a schema",
       package: package(),
       version: "0.1.0",
       elixir: "~> 1.9",
@@ -35,6 +35,7 @@ defmodule Gate.MixProject do
       {:poison, "~> 3.1"},
       {:espec, "~> 1.7.0", only: :test},
       {:benchee, "~> 1.0", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev},
     ]
   end
 end
