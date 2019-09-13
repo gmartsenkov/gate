@@ -4,6 +4,8 @@ defmodule Gate.MixProject do
   def project do
     [
       app: :gate,
+      description: "Validate paramteres against a schema",
+      package: package(),
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
@@ -17,6 +19,13 @@ defmodule Gate.MixProject do
     [
       mod: { Gate.Application, [] },
       extra_applications: [:logger]
+    ]
+  end
+
+  def package do
+    [
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/gmartsenkov/gate"}
     ]
   end
 
