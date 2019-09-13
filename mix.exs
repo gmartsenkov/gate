@@ -26,7 +26,9 @@ defmodule Gate.MixProject do
   def package do
     [
       licenses: ["Apache-2.0"],
-      links: %{"GitHub" => "https://github.com/gmartsenkov/gate"}
+      links: %{"GitHub" => "https://github.com/gmartsenkov/gate"},
+      files:
+      ~w(mix.exs README.md lib assets/default_locale.json)
     ]
   end
 
