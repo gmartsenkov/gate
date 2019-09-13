@@ -10,30 +10,33 @@ defmodule Gate do
     if errors == %{} do
       {:ok, new_params}
     else
-      {:error, errors }
+      {:error, errors}
     end
   end
 
   defp validate(schema, params, errors, new_params) do
-    key = schema |> Map.keys |> List.first
+    key = schema |> Map.keys() |> List.first()
 
     if Map.has_key?(params, key) do
       if is_map(schema[key]) do
-	case validate(schema[key], params[key], %{}, %{}) do
-	  {:ok, nested_params} -> nested_valid(key, schema, params, errors, new_params, nested_params)
-	  {:error, nested_errors} -> nested_invalid(key, schema, params, errors, nested_errors)
-	end
+        case validate(schema[key], params[key], %{}, %{}) do
+          {:ok, nested_params} ->
+            nested_valid(key, schema, params, errors, new_params, nested_params)
+
+          {:error, nested_errors} ->
+            nested_invalid(key, schema, params, errors, nested_errors)
+        end
       else
-	case Validator.validate(params[key], schema[key]) do
-	  true -> valid(key, schema, params, errors, new_params)
-	  error -> invalid(key, schema, params, errors, error)
-	end
+        case Validator.validate(params[key], schema[key]) do
+          true -> valid(key, schema, params, errors, new_params)
+          error -> invalid(key, schema, params, errors, error)
+        end
       end
     else
       if optional?(schema[key]) do
-	validate(schema |> Map.delete(key), params, errors, new_params)
+        validate(schema |> Map.delete(key), params, errors, new_params)
       else
-	missing(key, schema, params, errors)
+        missing(key, schema, params, errors)
       end
     end
   end
@@ -55,7 +58,12 @@ defmodule Gate do
   end
 
   defp missing(key, schema, params, errors) do
-    validate(schema |> Map.delete(key), params, errors |> Map.put(key, Locale.get("missing")), %{})
+    validate(
+      schema |> Map.delete(key),
+      params,
+      errors |> Map.put(key, Locale.get("missing")),
+      %{}
+    )
   end
 
   defp optional?(validations) when is_list(validations), do: Enum.member?(validations, :optional)
