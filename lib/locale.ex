@@ -16,20 +16,20 @@ defmodule Gate.Locale do
   end
 
   defp default_locale_file do
-    "../assets/default_locale.json"
+    "../../assets/default_locale.json"
+    |> Path.expand(__ENV__.file)
     |> read_locale_file
   end
 
   defp custom_locale_file do
     case Application.fetch_env(:param_validator, :locale_file) do
       :error -> %{}
-      {:ok, file_path} -> file_path |> read_locale_file
+      {:ok, file_path} -> file_path |> Path.expand(__DIR__) |> read_locale_file
     end
   end
 
   defp read_locale_file(path) do
     path
-    |> Path.expand(__DIR__)
     |> File.read!()
     |> Poison.decode!()
   end
