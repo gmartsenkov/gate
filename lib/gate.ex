@@ -30,7 +30,11 @@ defmodule Gate do
 	end
       end
     else
-      missing(key, schema, params, errors)
+      if optional?(schema[key]) do
+	validate(schema |> Map.delete(key), params, errors, new_params)
+      else
+	missing(key, schema, params, errors)
+      end
     end
   end
 
@@ -53,4 +57,7 @@ defmodule Gate do
   defp missing(key, schema, params, errors) do
     validate(schema |> Map.delete(key), params, errors |> Map.put(key, Locale.get("missing")), %{})
   end
+
+  defp optional?(validations) when is_list(validations), do: Enum.member?(validations, :optional)
+  defp optional?(validation), do: validation == :optional
 end

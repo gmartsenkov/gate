@@ -11,6 +11,7 @@ defmodule Gate.Validators.Type do
       def validate(value, :bool), do: if is_boolean(value), do: true, else: Locale.get("bool")
       def validate(value, :map), do: if is_map(value), do: true, else: Locale.get("map")
       def validate(value, :tuple), do: if is_tuple(value), do: true, else: Locale.get("tuple")
+      def validate(value, :optional), do: true
     end
   end
 end

@@ -8,6 +8,8 @@ defmodule GateSpec do
       %{
 	"int" => [:int, {:equal, 1}],
 	"string" => :str,
+	"boolean1" => :optional,
+	"boolean2" => [:bool, :optional],
 	"nested" => %{
 	  "float" => :float,
 	  "nested2" => %{
@@ -61,6 +63,7 @@ defmodule GateSpec do
 	%{
 	  "int" => "fail",
 	  "string" => 1,
+	  "boolean2" => 2,
 	  "extra" => "won't be included",
 	  "nested" => %{
 	    "float" => 1,
@@ -77,6 +80,7 @@ defmodule GateSpec do
 	%{
 	  "int" => ["Value is not an integer", "fail is not equal to 1"],
 	  "string" => "Value is not a string",
+	  "boolean2" => ["Value is not a boolean"],
 	  "nested" => %{
 	    "float" => "Value is not a float",
 	    "nested2" => %{"list" => "Value is not an array", "required" => "Is missing"}

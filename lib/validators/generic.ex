@@ -14,7 +14,6 @@ defmodule Gate.Validators.Generic do
       def validate(value, {:include, list}) do
 	if Enum.member?(list, value), do: true, else: Locale.get_and_replace("include", [value, list])
       end
-
     end
   end
 end
