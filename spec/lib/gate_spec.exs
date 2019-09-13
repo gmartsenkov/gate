@@ -2,7 +2,7 @@ defmodule GateSpec do
   use ESpec
 
   describe "valid?" do
-    subject do: described_module().valid?(schema(), params())
+    subject do: described_module().valid?(params(), schema())
 
     let :schema do
       %{
@@ -91,6 +91,22 @@ defmodule GateSpec do
       it "returns ok and the params" do
 	expect(subject())
 	|> to(eq {:error, expected()})
+      end
+    end
+
+    context "when validating a single value" do
+      context "when valid" do
+	it "returns true" do
+	  expect(described_module().valid?(2, [:int, {:equal, 2}]))
+	  |> to(eq true)
+	end
+      end
+
+      context "when valid" do
+	it "returns true" do
+	  expect(described_module().valid?("test", [:int, {:equal, 2}]))
+	  |> to(eq ["Value is not an integer", "test is not equal to 2"])
+	end
       end
     end
   end

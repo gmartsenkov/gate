@@ -2,9 +2,11 @@ defmodule Gate do
   alias Gate.Validator
   alias Gate.Locale
 
-  def valid?(schema, params) do
+  def valid?(params, schema) when is_map(schema) do
     validate(schema, params, %{}, %{})
   end
+
+  def valid?(attribute, schema), do: Validator.validate(attribute, schema)
 
   defp validate(schema, _params, errors, new_params) when schema == %{} do
     if errors == %{} do
