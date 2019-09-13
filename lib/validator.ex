@@ -1,6 +1,7 @@
 defmodule Gate.Validator do
   use Gate.Validators.Type
   use Gate.Validators.Generic
+  use Gate.Validators.String
 
   def validate(value, validations, result \\ [])
 

@@ -4,19 +4,19 @@ defmodule Gate.Validators.Generic do
   defmacro __using__(_opts) do
     quote do
       def validate(value, {:equal, expected}) do
-        if value == expected, do: true, else: Locale.get_and_replace("equal", [value, expected])
+        if value == expected, do: true, else: Locale.get("equal", [value, expected])
       end
 
       def validate(value, {:not_equal, expected}) do
         if value != expected,
           do: true,
-          else: Locale.get_and_replace("not_equal", [value, expected])
+          else: Locale.get("not_equal", [value, expected])
       end
 
       def validate(value, {:include, list}) do
         if Enum.member?(list, value),
           do: true,
-          else: Locale.get_and_replace("include", [value, list])
+          else: Locale.get("include", [value, list])
       end
     end
   end

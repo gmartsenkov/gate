@@ -7,12 +7,8 @@ defmodule Gate.Locale do
     Agent.start_link(&locales/0, name: @self)
   end
 
-  def get(key) do
-    Agent.get(@self, & &1[key])
-  end
-
-  def get_and_replace(key, values) do
-    get(key) |> Substitution.substitute(values)
+  def get(key, values \\ []) do
+    Agent.get(@self, & &1[key]) |> Substitution.substitute(values)
   end
 
   defp locales do
