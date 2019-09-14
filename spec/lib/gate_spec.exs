@@ -2,8 +2,9 @@ defmodule GateSpec do
   use ESpec
 
   describe "valid?" do
-    subject do: described_module().valid?(params(), schema())
+    subject do: described_module().valid?(params(), schema(), atomize())
 
+    let :atomize, do: false
     let :schema do
       %{
 	"int" => [:int, {:equal, 1}],
@@ -55,6 +56,29 @@ defmodule GateSpec do
       it "returns ok and the params" do
 	expect(subject())
 	|> to(eq {:ok, expected()})
+      end
+
+      context "when atomized is true" do
+	let :atomize, do: true
+
+	let :expected do
+	  %{
+	    int: 1,
+	    string: "test",
+	    nested: %{
+	      float: 1.5,
+	      nested2: %{
+		list: [1,2,3],
+		required: 2
+	      }
+	    }
+	  }
+	end
+
+	it "returns ok and the params" do
+	  expect(subject())
+	  |> to(eq {:ok, expected()})
+	end
       end
     end
 
