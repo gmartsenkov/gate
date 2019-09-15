@@ -1,4 +1,5 @@
 defmodule Gate.Errors.Substitution do
+  @moduledoc false
   alias Gate.Errors.Format
 
   def substitute(text, [value | tail]) do

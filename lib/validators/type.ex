@@ -1,4 +1,5 @@
 defmodule Gate.Validators.Type do
+  @moduledoc false
   alias Gate.Locale
 
   defmacro __using__(_opts) do
