@@ -142,6 +142,8 @@ Example custom locale that changes the default `:int` rule and also expose the v
 ## Additional options
 
 * Successful output keys can be atomized, for example:
+> Keep in mind that atoms are unique and the default limit is 1,048,576 [ref](http://erlang.org/doc/efficiency_guide/advanced.html)
+> Keys will not be converted to atoms if they are not defined in the schema
 
 ``` elixir
   @schema %{ "age" => :int }
