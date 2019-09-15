@@ -22,10 +22,10 @@ defmodule Gate.Validators.Generic do
       end
 
       def validate(value, {:custom, function }) when is_function(function) do
-	case function.(value) do
-	  {:locale, name, args} -> Locale.get(name, args)
-	  value -> value
-	end
+        case function.(value) do
+          {:locale, name, args} -> Locale.get(name, args)
+          value -> value
+        end
       end
     end
   end

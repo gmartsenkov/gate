@@ -1,4 +1,5 @@
 defmodule Gate.Locale do
+  @moduledoc false
   alias Gate.Errors.Substitution
 
   @self __MODULE__

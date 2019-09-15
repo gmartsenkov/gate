@@ -1,4 +1,8 @@
 defmodule Gate do
+  @moduledoc """
+   Write description
+  """
+
   alias Gate.Validator
   alias Gate.Locale
 

@@ -1,4 +1,6 @@
 defmodule Gate.Validator do
+  @moduledoc false
+
   use Gate.Validators.Type
   use Gate.Validators.Generic
   use Gate.Validators.String

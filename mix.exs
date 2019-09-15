@@ -38,7 +38,8 @@ defmodule Gate.MixProject do
       {:poison, "~> 3.1"},
       {:espec, "~> 1.7.0", only: :test},
       {:benchee, "~> 1.0", only: :dev},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 
