@@ -5,6 +5,7 @@ This is a simple API for validating data structures, mostly from user input like
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
+- [Rules](#rules)
 
 ## Installation
 
@@ -55,3 +56,22 @@ end
   # }
 ```
 
+## Rules
+
+Type checks available
+* `:int`
+* `:str`
+* `:float`
+* `:list`
+* `:atom`
+* `:bool`
+* `:map`
+* `:tuple`
+
+You can make an attribute optional with `:optional`
+
+More advanced rules are:
+* `{ :equal, 5 }` will check if the value is equal to 5
+* `{ :not_equal, 5 }` will check if the value is not equal to 5
+* `{ :include, ["option1", "option2"]}` will check if the value is in the List
+* `{ :regex, ~r/custom_regex/ }` will try and match the value against the Regex
