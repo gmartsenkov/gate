@@ -78,6 +78,7 @@ More advanced rules are:
 * `{ :include, ["option1", "option2"]}` will check if the value is in the List
 * `{ :regex, ~r/custom_regex/ }` will try and match the value against the Regex
 
+**You can validate a field with multiple rules by using a list - `[:str, {:equal, "spaghetti"}, {:custom, custom_rule()}]`**
 ## Custom Rules
 
 Example custom rule without the use of locales:
@@ -87,6 +88,8 @@ Example custom rule without the use of locales:
       if value == 1, do: true, else: "Value not equal to 1"
     end
   end
+  
+  Gate.valid(1, {:custom, custom_rule()})
 ```
 
 If you want to make use of custom ([Locales](#error-messages)) you can do something like:
