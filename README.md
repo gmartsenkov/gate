@@ -7,6 +7,7 @@ This is a simple API for validating data structures, mostly from user input like
 - [Usage](#usage)
 - [Rules](#rules)
 - [Custom Rules](#custom-rules)
+- [Error Messages](#error-messages)
 
 ## Installation
 
@@ -88,14 +89,44 @@ Example custom rule without the use of locales:
   end
 ```
 
-If you want to make use of the locales you can do something like:
+If you want to make use of custom ([Locales](#error-messages)) you can do something like:
 ```elixir
   def custom_rule do
     fn(value) ->
-      if value == 1, do: true, else: { :locale, "locale_name" }
+      if value == 1, do: true, else: { :locale, "custom_rule1" }
       # If you want to use the value in the locale 
       # you can pass it as a third argument like
-      # if value == 1, do: true, else: { :locale, "locale_name", value }
+      # if value == 1, do: true, else: { :locale, "custom_rule1", value }
     end
   end
 ```
+
+## Error messages
+The default error messages are defined in [here](https://github.com/gmartsenkov/gate/blob/master/assets/default_locale.json).
+They can be overriden by specifying your custom locale file in your `config/config.exs`
+
+``` elixir
+# config/config.exs
+
+use Mix.Config
+config :gate, locale_file: "assets/locale.json"
+```
+Example `locale.json`
+``` json
+{
+  "int": "This will override the default int type check error",
+  "custom_rule1": "Value does not match custom_rule1",
+}
+```
+Example custom locale that changes the default `:int` rule and also expose the value:
+``` json
+{
+  "int": "{} is not an integer"
+}
+```
+`{}` will be replaced with the value that is being validated
+``` elixir
+  Gate.valid?("not an integer", :int)
+  # "not an integer is not an integer"
+```
+
