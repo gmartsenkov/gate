@@ -32,6 +32,19 @@ defmodule Gate.Locale do
   defp read_locale_file(path) do
     path
     |> File.read!()
-    |> Poison.decode!()
+    |> decoder().decode!()
+  end
+
+  def decoder do
+    decoder = Application.fetch_env!(:gate, :decoder)
+    validate_decoder!(decoder)
+    decoder
+  end
+
+    defp validate_decoder!(module) do
+    unless Code.ensure_compiled?(module) and function_exported?(module, :decode!, 1) do
+      raise ArgumentError,
+        "invalid :json_decoder option"
+    end
   end
 end

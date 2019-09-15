@@ -6,7 +6,7 @@ defmodule Gate.MixProject do
       app: :gate,
       description: "Validate parameters against a schema",
       package: package(),
-      version: "0.1.2",
+      version: "0.1.3",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -35,7 +35,7 @@ defmodule Gate.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 3.1"},
+      {:poison, "~> 3.1", optional: true},
       {:espec, "~> 1.7.0", only: :test},
       {:benchee, "~> 1.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev},

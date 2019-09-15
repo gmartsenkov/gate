@@ -26,6 +26,16 @@ end
 ```
 
 ## Usage
+Gate's error message handling requires a JSON parser, a decoder must be set in `config/config.exs`
+
+``` elixir
+# config/config.exs
+
+use Mix.Config
+config :gate, decoder: Poison
+```
+
+Example:
 ```elixir
   @schema %{
     "name" => :str
