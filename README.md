@@ -89,9 +89,9 @@ Example custom rule without the use of locales:
     end
   end
   
-  Gate.valid(1, {:custom, custom_rule()})
+  Gate.valid?(1, {:custom, custom_rule()})
   # true
-  Gate.valid(2, {:custom, custom_rule()})
+  Gate.valid?(2, {:custom, custom_rule()})
   # "Value not equal to 1"
 ```
 
