@@ -6,72 +6,66 @@ defmodule Gate do
   alias Gate.Validator
   alias Gate.Locale
 
+  defstruct params: %{}, schema: %{}, errors: %{}, output: %{}, atomize: false
+
   def valid?(param, schema, atomize \\ false)
   def valid?(params, schema, atomize) when is_map(schema) do
-    validate(schema, params, %{}, %{}, atomize)
+    %Gate{params: params, schema: schema, atomize: atomize} |> validate()
   end
 
   def valid?(attribute, schema, _atomize), do: Validator.validate(attribute, schema)
 
-  defp validate(schema, _params, errors, new_params, _atomize) when schema == %{} do
-    if errors == %{} do
-      {:ok, new_params}
+  defp validate(%{schema: schema} = result) when schema == %{} do
+    if result.errors == %{} do
+      {:ok, result.output}
     else
-      {:error, errors}
+      {:error, result.errors}
     end
   end
 
-  defp validate(schema, params, errors, new_params, atomize) do
-    key = schema |> Map.keys() |> List.first()
+  defp validate(tracker) do
+    key = tracker.schema |> Map.keys() |> List.first()
 
-    if Map.has_key?(params, key) do
-      if is_map(schema[key]) do
-        case validate(schema[key], params[key], %{}, %{}, atomize) do
-          {:ok, nested_params} ->
-            nested_valid(key, schema, params, errors, new_params, nested_params, atomize)
-
-          {:error, nested_errors} ->
-            nested_invalid(key, schema, params, errors, nested_errors)
+    if Map.has_key?(tracker.params, key) do
+      if is_map(tracker.schema[key]) do
+        case validate(%{tracker | schema: tracker.schema[key], params: tracker.params[key], errors: %{}, output: %{}}) do
+          {:ok, nested_params}    -> nested_valid(key, tracker, nested_params)
+          {:error, nested_errors} -> nested_invalid(key, tracker, nested_errors)
         end
       else
-        case Validator.validate(params[key], schema[key]) do
-          true -> valid(key, schema, params, errors, new_params, atomize)
-          error -> invalid(key, schema, params, errors, error)
+        case Validator.validate(tracker.params[key], tracker.schema[key]) do
+          true -> valid(key, tracker)
+          error -> invalid(key, tracker, error)
         end
       end
     else
-      if optional?(schema[key]) do
-        validate(schema |> Map.delete(key), params, errors, new_params, atomize)
+      if optional?(tracker.schema[key]) do
+        validate(tracker |> delete(key))
       else
-        missing(key, schema, params, errors)
+        missing(key, tracker)
       end
     end
   end
 
-  defp nested_valid(key, schema, params, errors, new_params, nested_params, atomize) do
-    validate(schema |> Map.delete(key), params, errors, new_params |> put(key, nested_params, atomize), atomize)
+  defp nested_valid(key, tracker, nested_params) do
+    validate(%{tracker |> delete(key) | output: tracker.output |> put(key, nested_params, tracker.atomize)})
   end
 
-  defp nested_invalid(key, schema, params, errors, nested_errors) do
-    validate(schema |> Map.delete(key), params, errors |> Map.put(key, nested_errors), %{}, false)
+  defp nested_invalid(key, tracker, nested_errors) do
+    validate(%{tracker |> delete(key) | errors: tracker.errors |> Map.put(key, nested_errors)})
   end
 
-  defp valid(key, schema, params, errors, new_params, atomize) do
-    validate(schema |> Map.delete(key), params, errors, new_params |> put(key, params[key], atomize), atomize)
+  defp valid(key, tracker) do
+    validate(%{tracker |> delete(key) | output: tracker.output |> put(key, tracker.params[key], tracker.atomize)})
   end
 
-  defp invalid(key, schema, params, errors, error) do
-    validate(schema |> Map.delete(key), params, errors |> Map.put(key, error), %{}, false)
+  defp invalid(key, tracker, error) do
+    validate(%{tracker |> delete(key) | errors: tracker.errors |> Map.put(key, error)})
   end
 
-  defp missing(key, schema, params, errors) do
+  defp missing(key, tracker) do
     validate(
-      schema |> Map.delete(key),
-      params,
-      errors |> Map.put(key, Locale.get("missing")),
-      %{},
-      false
-    )
+      %{tracker |> delete(key) | errors: tracker.errors |> Map.put(key, Locale.get("missing"))})
   end
 
   defp put(target, key, new, true = _atomize), do: Map.put(target, String.to_atom(key), new)
@@ -80,4 +74,6 @@ defmodule Gate do
 
   defp optional?(validations) when is_list(validations), do: Enum.member?(validations, :optional)
   defp optional?(validation), do: validation == :optional
+
+  defp delete(tracker, key), do: %{ tracker | schema: tracker.schema |> Map.delete(key)}
 end
