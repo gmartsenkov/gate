@@ -132,7 +132,7 @@ Example custom locale that changes the default `:int` rule and also expose the v
 ```
 `{}` will be replaced with the value that is being validated
 ``` elixir
-  Gate.valid?("not an integer", :int)
-  # "not an integer is not an integer"
+  Gate.valid?("spaghetti", :int)
+  # "spaghetti is not an integer"
 ```
 
