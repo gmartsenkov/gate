@@ -58,7 +58,7 @@ end
 
 ## Rules
 
-Type checks available
+Type checks available:
 * `:int`
 * `:str`
 * `:float`
@@ -68,7 +68,7 @@ Type checks available
 * `:map`
 * `:tuple`
 
-You can make an attribute optional with `:optional`
+**You can make an attribute optional with `:optional`**
 
 More advanced rules are:
 * `{ :equal, 5 }` will check if the value is equal to 5
