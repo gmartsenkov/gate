@@ -2,8 +2,24 @@
 
 This is a simple API for validating data structures, mostly from user input like web forms or API requests.
 
-Example:
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
 
+## Installation
+
+the package can be installed
+by adding `gate` to your list of dependencies in `mix.exs` and run `mix deps.get`:
+
+```elixir
+def deps do
+  [
+    {:gate, "~> 0.1.1"}
+  ]
+end
+```
+
+## Usage
 ```elixir
   @schema %{
     "name" => :str
