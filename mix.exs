@@ -35,7 +35,7 @@ defmodule Gate.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 3.1", optional: true},
+      {:poison, ">= 0.0.0", optional: true},
       {:espec, "~> 1.7.0", only: :test},
       {:benchee, "~> 1.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev},
