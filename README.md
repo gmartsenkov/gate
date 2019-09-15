@@ -1,4 +1,6 @@
 # Gate
+[![Hex.pm](https://img.shields.io/hexpm/v/gate.svg)](https://hex.pm/packages/gate)
+[![CircleCI](https://circleci.com/gh/gmartsenkov/gate.svg?style=svg)](https://circleci.com/gh/gmartsenkov/gate)
 
 This is a simple API for validating data structures, mostly from user input like web forms or API requests.
 
