@@ -90,6 +90,9 @@ Example custom rule without the use of locales:
   end
   
   Gate.valid(1, {:custom, custom_rule()})
+  # true
+  Gate.valid(2, {:custom, custom_rule()})
+  # "Value not equal to 1"
 ```
 
 If you want to make use of custom ([Locales](#error-messages)) you can do something like:
