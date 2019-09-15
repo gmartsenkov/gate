@@ -24,33 +24,33 @@ end
   @schema %{
     "name" => :str
     "age" => :int,
-	"gender" => {:include, ["male", "female"]},
-	"more_info" => %{
-	  "telefone" => [:str, {:regex, ~r/custom_regex/}],
-	  "address" => [:optional, :str]
-	}
+    "gender" => {:include, ["male", "female"]},
+    "more_info" => %{
+      "telefone" => [:str, {:regex, ~r/custom_regex/}],
+      "address" => [:optional, :str]
+    }
   }
-  
+
   form_data = %{
-	"name" => "Jon",
-	"age" => 21,
-	"gender" => "male",
-	"exra_field" => "something", # It'll be ignored
-	"more_info" => %{
-	  "telefone" => "custom_regex",
-	}
+    "name" => "Jon",
+    "age" => 21,
+    "gender" => "male",
+    "exra_field" => "something", # It'll be ignored
+    "more_info" => %{
+      "telefone" => "custom_regex",
+    }
   }
   
   Gate.valid?(form_data, @schema)
   # { 
   #   :ok, 
   #   %{
-  #    	"name" => "Jon",
-  # 	"age" => 21,
-  #	    "gender" => "male",
+  #     "name" => "Jon",
+  #     "age" => 21,
+  #     "gender" => "male",
   #     "more_info" => %{
-  #	      "telefone" => "custom_regex",
-  #	    }
+  #       "telefone" => "custom_regex",
+  #     }
   #   } 
   # }
 ```
