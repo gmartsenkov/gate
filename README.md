@@ -6,6 +6,7 @@ This is a simple API for validating data structures, mostly from user input like
 - [Installation](#installation)
 - [Usage](#usage)
 - [Rules](#rules)
+- [Custom Rules](#custom-rules)
 
 ## Installation
 
@@ -75,3 +76,26 @@ More advanced rules are:
 * `{ :not_equal, 5 }` will check if the value is not equal to 5
 * `{ :include, ["option1", "option2"]}` will check if the value is in the List
 * `{ :regex, ~r/custom_regex/ }` will try and match the value against the Regex
+
+## Custom Rules
+
+Example custom rule without the use of locales:
+```elixir
+  def custom_rule do
+    fn(value) ->
+      if value == 1, do: true, else: "Value not equal to 1"
+    end
+  end
+```
+
+If you want to make use of the locales you can do something like:
+```elixir
+  def custom_rule do
+    fn(value) ->
+      if value == 1, do: true, else: { :locale, "locale_name" }
+      # If you want to use the value in the locale 
+      # you can pass it as a third argument like
+      # if value == 1, do: true, else: { :locale, "locale_name", value }
+    end
+  end
+```
