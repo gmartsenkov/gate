@@ -8,6 +8,7 @@ This is a simple API for validating data structures, mostly from user input like
 - [Rules](#rules)
 - [Custom Rules](#custom-rules)
 - [Error Messages](#error-messages)
+- [Additional options](#additional-options)
 
 ## Installation
 
@@ -136,3 +137,15 @@ Example custom locale that changes the default `:int` rule and also expose the v
   # "spaghetti is not an integer"
 ```
 
+## Additional options
+
+* Successful output keys can be atomized, for example:
+
+``` elixir
+  @schema %{ "age" => :int }
+  
+  form_data = %{ "age" = 1 }
+  
+  Gate.valid?(form_data, schema, _atomized=true)
+  # { :ok, %{ age: 1 } }
+```
