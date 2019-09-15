@@ -13,5 +13,6 @@ jobs:
       - checkout
 
       # specify any bash command here prefixed with `run: `
+      - run: mix local.hex --force  # install Hex locally (without prompt	
       - run: mix deps.get
       - run: mix espec
