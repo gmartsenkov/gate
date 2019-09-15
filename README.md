@@ -153,3 +153,7 @@ Example custom locale that changes the default `:int` rule and also expose the v
   Gate.valid?(form_data, schema, _atomized=true)
   # { :ok, %{ age: 1 } }
 ```
+
+## License
+
+[MIT](LICENSE) &copy; gmartsenkov
