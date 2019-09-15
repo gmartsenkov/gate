@@ -109,7 +109,7 @@ If you want to make use of custom ([Locales](#error-messages)) you can do someth
 
 ## Error messages
 The default error messages are defined in [here](https://github.com/gmartsenkov/gate/blob/master/assets/default_locale.json).
-They can be overriden by specifying your custom locale file in your `config/config.exs`
+They can be overridden by specifying your custom locale file in your `config/config.exs`
 
 ``` elixir
 # config/config.exs
