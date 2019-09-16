@@ -6,7 +6,7 @@ defmodule Gate.Validators.TypeSpec do
     %{ type: :int, valid_value: 1, wrong_value: "string", error: "Value is not an integer" },
     %{ type: :str, valid_value: "string", wrong_value: 1, error: "Value is not a string" },
     %{ type: :float, valid_value: 1.5, wrong_value: 1, error: "Value is not a float" },
-    %{ type: :list, valid_value: [], wrong_value: 1, error: "Value is not an array" },
+    %{ type: :list, valid_value: [], wrong_value: 1, error: "Value is not a list" },
     %{ type: :atom, valid_value: :a, wrong_value: 1, error: "Value is not an atom" },
     %{ type: :bool, valid_value: true, wrong_value: nil, error: "Value is not a boolean" },
     %{ type: :map, valid_value: %{}, wrong_value: 1, error: "Value is not a hash" }

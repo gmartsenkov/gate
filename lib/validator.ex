@@ -4,6 +4,7 @@ defmodule Gate.Validator do
   use Gate.Validators.Type
   use Gate.Validators.Generic
   use Gate.Validators.String
+  use Gate.Validators.Each
 
   def validate(value, validations, result \\ [])
 

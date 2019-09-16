@@ -107,7 +107,7 @@ defmodule GateSpec do
 	  "boolean2" => ["Value is not a boolean"],
 	  "nested" => %{
 	    "float" => "Value is not a float",
-	    "nested2" => %{"list" => "Value is not an array", "required" => "Is missing"}
+	    "nested2" => %{"list" => "Value is not a list", "required" => "Is missing"}
 	  }
 	}
       end
