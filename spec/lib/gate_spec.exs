@@ -2,9 +2,8 @@ defmodule GateSpec do
   use ESpec
 
   describe "valid?" do
-    subject do: described_module().valid?(params(), schema(), atomize())
+    subject do: described_module().valid?(params(), schema())
 
-    let :atomize, do: false
     let :schema do
       %{
 	"int" => [:int, {:equal, 1}],

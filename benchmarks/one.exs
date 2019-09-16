@@ -45,7 +45,6 @@ invalid_params =
 Benchee.run(
   %{
     "Valid" => fn -> Gate.valid?(valid_params, schema) end,
-    "Valid and atomize keys" => fn -> Gate.valid?(valid_params, schema, _atomize = true) end,
     "Invalid" => fn -> Gate.valid?(invalid_params, schema) end,
   },
   time: 10,

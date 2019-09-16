@@ -10,7 +10,7 @@ This is a simple API for validating data structures, mostly from user input like
 - [Rules](#rules)
 - [Custom Rules](#custom-rules)
 - [Error Messages](#error-messages)
-- [Additional options](#additional-options)
+- [Licence](#licence)
 
 ## Installation
 
@@ -166,21 +166,6 @@ Example custom locale that changes the default `:int` rule and also expose the v
 ``` elixir
   Gate.valid?("spaghetti", :int)
   # "spaghetti is not an integer"
-```
-
-## Additional options
-
-* Successful output keys can be atomized, for example:
-> Keep in mind that atoms are unique and the default limit is 1,048,576 [ref](http://erlang.org/doc/efficiency_guide/advanced.html)
-> Keys will not be converted to atoms if they are not defined in the schema
-
-``` elixir
-  @schema %{ "age" => :int }
-  
-  form_data = %{ "age" = 1 }
-  
-  Gate.valid?(form_data, schema, _atomized=true)
-  # { :ok, %{ age: 1 } }
 ```
 
 ## License
