@@ -77,8 +77,12 @@ defmodule Gate.Validators.EachSpec do
 	context "when value match the requirement" do
 	  it "returns true" do
 	    inner = %{"id" => :int, "type"=> {:equal, "user"}}
-	    expect(validate([%{"id" => 1, "type" => "admin"}], {:each, inner}))
-	    |> to(eq %{"type" => "admin is not equal to user"})
+	    test_data = [
+	      %{"id" => 1, "type" => "user"},
+	      %{"id" => 1, "type" => "admin"},
+	    ]
+	    expect(validate(test_data, {:each, inner}))
+	    |> to(eq %{ "1" => %{"type" => "admin is not equal to user"} })
 	  end
 	end
       end

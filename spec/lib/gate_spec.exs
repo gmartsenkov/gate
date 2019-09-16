@@ -71,8 +71,8 @@ defmodule GateSpec do
 	  "boolean2" => 2,
 	  "extra" => "won't be included",
 	  "users" => [
-	    %{ "id" => 1, "type" => "admin" },
-	    %{ "id" => 2, "type" => "admin" }
+	    %{ "id" => 1, "type" => "god" },
+	    %{ "id" => "invalid", "type" => "mortal" }
 	  ],
 	  "nested" => %{
 	    "float" => 1,
@@ -90,7 +90,10 @@ defmodule GateSpec do
 	  "int" => ["Value is not an integer", "fail is not equal to 1"],
 	  "string" => "Value is not a string",
 	  "boolean2" => ["Value is not a boolean"],
-	  "users" => %{"type" => "admin is not equal to user"},
+	  "users" => %{
+	    "0" => %{ "type" => "god is not equal to user" },
+	    "1" => %{ "id" => "Value is not an integer", "type" => "mortal is not equal to user" },
+	  },
 	  "nested" => %{
 	    "float" => "Value is not a float",
 	    "nested2" => %{"list" => "Value is not a list", "required" => "Is missing"}
