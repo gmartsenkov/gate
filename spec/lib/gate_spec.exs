@@ -11,6 +11,9 @@ defmodule GateSpec do
 	"string" => :str,
 	"boolean1" => :optional,
 	"boolean2" => [:bool, :optional],
+	"users" => {:each,
+          %{ "id" => :int, "type" => {:equal, "user"}}
+        },
 	"nested" => %{
 	  "float" => :float,
 	  "nested2" => %{
@@ -27,6 +30,7 @@ defmodule GateSpec do
 	  "int" => 1,
 	  "string" => "test",
 	  "extra" => "won't be included",
+	  "users" => [%{"id" => 1, "type" => "user" }],
 	  "nested" => %{
 	    "float" => 1.5,
 	    "extra" => "won't be included",
@@ -43,6 +47,7 @@ defmodule GateSpec do
 	%{
 	  "int" => 1,
 	  "string" => "test",
+	  "users" => [%{"id" => 1, "type" => "user" }],
 	  "nested" => %{
 	    "float" => 1.5,
 	    "nested2" => %{
@@ -57,29 +62,6 @@ defmodule GateSpec do
 	expect(subject())
 	|> to(eq {:ok, expected()})
       end
-
-      context "when atomized is true" do
-	let :atomize, do: true
-
-	let :expected do
-	  %{
-	    int: 1,
-	    string: "test",
-	    nested: %{
-	      float: 1.5,
-	      nested2: %{
-		list: [1,2,3],
-		required: 2
-	      }
-	    }
-	  }
-	end
-
-	it "returns ok and the params" do
-	  expect(subject())
-	  |> to(eq {:ok, expected()})
-	end
-      end
     end
 
     context "when params are invalid" do
@@ -89,6 +71,10 @@ defmodule GateSpec do
 	  "string" => 1,
 	  "boolean2" => 2,
 	  "extra" => "won't be included",
+	  "users" => [
+	    %{ "id" => 1, "type" => "admin" },
+	    %{ "id" => 2, "type" => "admin" }
+	  ],
 	  "nested" => %{
 	    "float" => 1,
 	    "extra" => "won't be included",
@@ -105,6 +91,7 @@ defmodule GateSpec do
 	  "int" => ["Value is not an integer", "fail is not equal to 1"],
 	  "string" => "Value is not a string",
 	  "boolean2" => ["Value is not a boolean"],
+	  "users" => %{"type" => "admin is not equal to user"},
 	  "nested" => %{
 	    "float" => "Value is not a float",
 	    "nested2" => %{"list" => "Value is not a list", "required" => "Is missing"}

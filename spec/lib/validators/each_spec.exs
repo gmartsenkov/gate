@@ -64,6 +64,24 @@ defmodule Gate.Validators.EachSpec do
 	  end
 	end
       end
+
+      context "when passing a map" do
+	context "when value match the requirement" do
+	  it "returns true" do
+	    inner = %{"id" => :int, "type"=> {:equal, "user"}}
+	    expect(validate([%{"id" => 1, "type" => "user"}], {:each, inner}))
+	    |> to(eq true)
+	  end
+	end
+
+	context "when value match the requirement" do
+	  it "returns true" do
+	    inner = %{"id" => :int, "type"=> {:equal, "user"}}
+	    expect(validate([%{"id" => 1, "type" => "admin"}], {:each, inner}))
+	    |> to(eq %{"type" => "admin is not equal to user"})
+	  end
+	end
+      end
     end
   end
 end

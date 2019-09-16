@@ -45,6 +45,9 @@ Example:
     "more_info" => %{
       "telefone" => [:str, {:regex, ~r/custom_regex/}],
       "address" => [:optional, :str]
+    },
+    "relationships" => {:each,
+      %{ "id" => :int, "type" => {:equal, "user" } }
     }
   }
 
@@ -56,7 +59,11 @@ Example:
     "exra_field" => "something", # It'll be ignored
     "more_info" => %{
       "telefone" => "custom_regex",
-    }
+    },
+    "relationships" => [
+      %{ "id" => 1, "type" => "user" },
+      %{ "id" => 2, "type" => "user" }
+    ]
   }
   
   Gate.valid?(form_data, @schema)
@@ -69,7 +76,11 @@ Example:
   #     "pet_names" => ["jekyll", "hyde"],
   #     "more_info" => %{
   #       "telefone" => "custom_regex",
-  #     }
+  #     },
+  #    "relationships" => [
+  #      %{ "id" => 1, "type" => "user" },
+  #      %{ "id" => 2, "type" => "user" }
+  #    ]
   #   } 
   # }
 ```
@@ -99,6 +110,7 @@ More advanced rules are:
 If you wanna check the value of each element in a list you can use `{:each, rule}` for example:
 * `{:each, :int}` - will check if all elements are integers
 * `{:each, {:include, ["a", "list", "of", "options"]}}` - will check that each value is in the list
+* `{:each, %{ "id" => :int} }` - when you pass a map it'll check all elements against that map
 ## Custom Rules
 
 Example custom rule without the use of locales:
