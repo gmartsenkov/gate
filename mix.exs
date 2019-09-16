@@ -6,7 +6,7 @@ defmodule Gate.MixProject do
       app: :gate,
       description: "Validate parameters against a schema",
       package: package(),
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
