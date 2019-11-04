@@ -44,8 +44,6 @@ defmodule Gate.MixProject do
   end
 
   defp docs do
-    [
-      logo: "assets/images/docs_logo.png"
-    ]
+    []
   end
 end
