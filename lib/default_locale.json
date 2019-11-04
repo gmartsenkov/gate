@@ -11,5 +11,7 @@
   "not_equal": "{} is equal to {}",
   "include": "{} is not part of {}",
   "regex": "{} does not match the regural expression",
-  "missing": "Is missing"
+  "greater_then": "{} is not greater then {}",
+  "missing": "Is missing",
+  "number": "Value is not a number"
 }

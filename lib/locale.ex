@@ -17,7 +17,7 @@ defmodule Gate.Locale do
   end
 
   defp default_locale_file do
-    "../../assets/default_locale.json"
+    "../default_locale.json"
     |> Path.expand(__ENV__.file)
     |> read_locale_file
   end

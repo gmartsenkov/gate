@@ -20,7 +20,7 @@ by adding `gate` to your list of dependencies in `mix.exs` and run `mix deps.get
 ```elixir
 def deps do
   [
-    {:gate, "~> 0.1.5"}
+    {:gate, "~> 0.1.6"}
   ]
 end
 ```
@@ -96,6 +96,7 @@ Type checks available:
 * `:bool`
 * `:map`
 * `:tuple`
+* `:number`
 
 **You can make an attribute optional with `:optional`**
 

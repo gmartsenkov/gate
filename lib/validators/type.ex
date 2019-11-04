@@ -5,6 +5,7 @@ defmodule Gate.Validators.Type do
   defmacro __using__(_opts) do
     quote do
       def validate(value, :int), do: if(is_integer(value), do: true, else: Locale.get("int", value))
+      def validate(value, :number), do: if(is_number(value), do: true, else: Locale.get("number", value))
       def validate(value, :str), do: if(is_binary(value), do: true, else: Locale.get("str", value))
       def validate(value, :float), do: if(is_float(value), do: true, else: Locale.get("float", value))
       def validate(value, :list), do: if(is_list(value), do: true, else: Locale.get("list", value))

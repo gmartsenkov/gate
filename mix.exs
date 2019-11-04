@@ -6,7 +6,7 @@ defmodule Gate.MixProject do
       app: :gate,
       description: "Validate parameters against a schema",
       package: package(),
-      version: "0.1.5",
+      version: "0.1.6",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -28,7 +28,7 @@ defmodule Gate.MixProject do
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/gmartsenkov/gate"},
       files:
-      ~w(mix.exs README.md lib assets/default_locale.json)
+      ~w(mix.exs README.md lib)
     ]
   end
 
