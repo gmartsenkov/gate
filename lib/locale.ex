@@ -17,8 +17,7 @@ defmodule Gate.Locale do
   end
 
   defp default_locale_file do
-    "#{:code.priv_dir(:gate)}/default_locale.json"
-    |> Path.expand(__ENV__.file)
+    default_locale(heroku?())
     |> read_locale_file
   end
 
@@ -28,6 +27,10 @@ defmodule Gate.Locale do
       {:ok, file_path} -> file_path |> read_locale_file
     end
   end
+
+  defp default_locale(nil), do: "../default_locale.json" |> Path.expand(__ENV__.file)
+  defp default_locale(_), do: "/app/deps/gate/lib/default_locale.json"
+  defp heroku?, do: System.get_env("HEROKU_EXEC_URL")
 
   defp read_locale_file(path) do
     path
@@ -41,7 +44,7 @@ defmodule Gate.Locale do
     decoder
   end
 
-    defp validate_decoder!(module) do
+  defp validate_decoder!(module) do
     unless Code.ensure_compiled?(module) and function_exported?(module, :decode!, 1) do
       raise ArgumentError,
         "invalid :json_decoder option"
