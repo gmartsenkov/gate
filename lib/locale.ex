@@ -17,7 +17,7 @@ defmodule Gate.Locale do
   end
 
   defp default_locale_file do
-    "../default_locale.json"
+    "#{:code.priv_dir(:gate)}/default_locale.json"
     |> Path.expand(__ENV__.file)
     |> read_locale_file
   end
