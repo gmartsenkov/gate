@@ -20,7 +20,7 @@ by adding `gate` to your list of dependencies in `mix.exs` and run `mix deps.get
 ```elixir
 def deps do
   [
-    {:gate, "~> 0.1.8"}
+    {:gate, "~> 0.1.9"}
   ]
 end
 ```
