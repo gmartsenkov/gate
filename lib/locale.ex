@@ -13,12 +13,27 @@ defmodule Gate.Locale do
   end
 
   defp locales do
-    Map.merge(default_locale_file(), custom_locale_file())
+    Map.merge(default_locale(), custom_locale_file())
   end
 
-  defp default_locale_file do
-    default_locale(heroku?())
-    |> read_locale_file
+  defp default_locale do
+    %{
+      "int" => "Value is not an integer",
+      "str" => "Value is not a string",
+      "float" => "Value is not a float",
+      "list" => "Value is not a list",
+      "atom" => "Value is not an atom",
+      "bool" => "Value is not a boolean",
+      "map" => "Value is not a hash",
+      "tuple" => "Value is not a tupple",
+      "equal" => "{} is not equal to {}",
+      "not_equal" => "{} is equal to {}",
+      "include" => "{} is not part of {}",
+      "regex" => "{} does not match the regural expression",
+      "greater_then" => "{} is not greater then {}",
+      "missing" => "Is missing",
+      "number" => "Value is not a number"
+    }
   end
 
   defp custom_locale_file do
@@ -27,10 +42,6 @@ defmodule Gate.Locale do
       {:ok, file_path} -> file_path |> read_locale_file
     end
   end
-
-  defp default_locale(nil), do: "../default_locale.json" |> Path.expand(__ENV__.file)
-  defp default_locale(_), do: "/app/deps/gate/lib/default_locale.json"
-  defp heroku?, do: System.get_env("HEROKU_EXEC_URL")
 
   defp read_locale_file(path) do
     path
